@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="ページ-1" id="Bnm4ntH5q4Oo1bpQi49J">
+    <mxGraphModel dx="1094" dy="658" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-7" edge="1" parent="1" source="wyOZYzW8p5D3STkxF2Px-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="wyOZYzW8p5D3STkxF2Px-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-10" edge="1" parent="1" source="wyOZYzW8p5D3STkxF2Px-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="wyOZYzW8p5D3STkxF2Px-5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-1" parent="1" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" value="Actor" vertex="1">
+          <mxGeometry height="60" width="30" x="90" y="220" as="geometry" />
+        </mxCell>
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-8" edge="1" parent="1" source="wyOZYzW8p5D3STkxF2Px-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="wyOZYzW8p5D3STkxF2Px-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;align=center;labelPosition=center;verticalLabelPosition=top;verticalAlign=bottom;labelBackgroundColor=none;fillColor=none;" value="&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;セルフレジ&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="280" width="400" x="270" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-4" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;fillColor=none;" value="商品を読み取る" vertex="1">
+          <mxGeometry height="80" width="180" x="370" y="140" as="geometry" />
+        </mxCell>
+        <mxCell id="wyOZYzW8p5D3STkxF2Px-5" parent="1" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;fillColor=none;" value="支払う" vertex="1">
+          <mxGeometry height="80" width="180" x="370" y="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
