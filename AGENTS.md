@@ -8,8 +8,6 @@
 
 ## プロジェクト構成とモジュール
 
-このリポジトリは、投稿の一覧・編集・削除を扱う Laravel 10 の練習用アプリです。アプリケーションコードは `app/` にあります。コントローラーは `app/Http/Controllers/`、Eloquent モデルは `app/Models/`、ポリシーは `app/Policies/`、Fortify のアクションは `app/Actions/` に配置します。ルートは `routes/web.php`、Blade テンプレートとフロントエンドのエントリーポイントは `resources/views/`、`resources/js/`、`resources/css/` です。スキーマ変更、ファクトリ、シーダーは `database/`、テストは `tests/Feature/` または `tests/Unit/` に置きます。
-
 `docs/` は Tutorial で作成する設計書、`answers/` は解答例です。どちらもアプリケーションの動作に影響させないでください。
 
 ## ビルド・テスト・開発コマンド
@@ -23,7 +21,7 @@ Docker Desktop を起動してから Laravel Sail を使います。
 ./vendor/bin/sail down                   # コンテナを停止
 ```
 
-Laravel コマンドは、実行環境をそろえるため `./vendor/bin/sail artisan` 経由で実行してください。テストは `./vendor/bin/sail test` を使います。
+Laravel コマンドは、実行環境をそろえるため `./vendor/bin/sail artisan` 経由で実行してください。テストは `./vendor/bin/sail test` を使います。php artisan では動きません。
 
 ## コーディングスタイルと命名
 
