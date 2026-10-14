@@ -10,9 +10,25 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::with(['user', 'category'])->latest()->get();
+        $posts = Post::with(['user', 'category'])->latest()->orderByDesc('id')->get();
+        $categories = Category::orderBy('id')->get();
 
-        return view('posts.index', compact('posts'));
+        return view('posts.index', compact('posts', 'categories'));
+    }
+
+    public function store(Request $request)
+    {
+        $validated = $request->validate([
+            'title' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
+            'content' => 'required|string|max:140',
+        ], [
+            'content.max' => '本文は140字以内で入力してください。',
+        ]);
+
+        $request->user()->posts()->create($validated);
+
+        return redirect()->route('posts.index');
     }
 
     public function edit(Post $post)
