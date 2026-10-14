@@ -1,0 +1,32 @@
+# Repository Guidelines
+
+## プロジェクト構成とモジュール
+
+このリポジトリは、投稿の一覧・編集・削除を扱う Laravel 10 の練習用アプリです。アプリケーションコードは `app/` にあります。コントローラーは `app/Http/Controllers/`、Eloquent モデルは `app/Models/`、ポリシーは `app/Policies/`、Fortify のアクションは `app/Actions/` に配置します。ルートは `routes/web.php`、Blade テンプレートとフロントエンドのエントリーポイントは `resources/views/`、`resources/js/`、`resources/css/` です。スキーマ変更、ファクトリ、シーダーは `database/`、テストは `tests/Feature/` または `tests/Unit/` に置きます。
+
+`docs/` は Tutorial で作成する設計書、`answers/` は解答例です。どちらもアプリケーションの動作に影響させないでください。
+
+## ビルド・テスト・開発コマンド
+
+Docker Desktop を起動してから Laravel Sail を使います。
+
+```bash
+./vendor/bin/sail up -d                  # アプリと MySQL を起動
+./vendor/bin/sail artisan migrate --seed # スキーマとサンプルデータを投入
+./vendor/bin/sail artisan test           # PHPUnit テストを実行
+./vendor/bin/sail down                   # コンテナを停止
+```
+
+Laravel コマンドは、実行環境をそろえるため `./vendor/bin/sail artisan` 経由で実行してください。
+
+## コーディングスタイルと命名
+
+`.editorconfig` に従い、UTF-8、LF、スペース 4 個のインデント、末尾改行を使用します。末尾の空白は削除します（Markdown は除く）。名前空間は `App\\` 配下の PSR-4 を使い、モデルは `Post` のように単数形の PascalCase、マイグレーションのテーブル名は複数形にします。変更した PHP はコミット前に `./vendor/bin/sail pint` で整形してください。
+
+## テスト方針
+
+PHPUnit の設定は `phpunit.xml` にあります。リクエスト、認可、データベース、ビューの振る舞いは `tests/Feature/` に、単独のロジックは `tests/Unit/` に置きます。テスト名は `test_users_cannot_edit_another_users_post` のように振る舞いを表してください。機能変更時はテストを追加または更新し、PR 前に `./vendor/bin/sail artisan test` を実行します。カバレッジの数値基準はありません。
+
+## コミットとプルリクエスト
+
+最近のコミットは `13-3: 投稿編集画面の画面仕様を追加` のように、Tutorial 番号と内容を含む簡潔な日本語の件名です。コミットは目的ごとに分け、必要がない限り `docs/`、`answers/`、実行コードを混在させません。PR には目的、影響するルートまたは画面、実行したテスト、関連する Issue または Tutorial 課題を書いてください。Blade や CSS の見た目を変えた場合はスクリーンショットを添え、マイグレーション、シーダー、設定の変更も明記します。

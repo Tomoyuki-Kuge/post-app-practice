@@ -19,6 +19,18 @@
         .logout-btn:hover { background: #F7F8F9; }
         .logout-btn:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; }
         .page-title { padding: 0.55rem 1rem 0.7rem; font-weight: 800; font-size: 1.06rem; }
+        .composer { padding: 1rem; border-bottom: 1px solid #EFF1F4; }
+        .composer h2 { font-size: 0.95rem; margin-bottom: 0.8rem; }
+        .composer .form-group { margin-bottom: 0.75rem; }
+        .composer label { display: block; color: #5B6570; margin-bottom: 0.35rem; font-size: 0.8rem; font-weight: 700; }
+        .composer input, .composer select, .composer textarea { width: 100%; padding: 0.65rem 0.75rem; border: 1px solid #D3D9DE; border-radius: 9px; font-size: 0.9rem; font-family: inherit; background: #fff; color: #0F1419; }
+        .composer textarea { min-height: 100px; resize: vertical; line-height: 1.6; }
+        .composer input:focus, .composer select:focus, .composer textarea:focus { outline: none; border-color: #0F1419; box-shadow: 0 0 0 3px rgba(232, 121, 43, 0.18); }
+        .composer .author { color: #5B6570; font-size: 0.82rem; margin-bottom: 0.75rem; }
+        .composer .submit { display: block; margin-left: auto; background: #0F1419; color: #fff; border: none; padding: 0.58rem 1.4rem; border-radius: 999px; font-size: 0.85rem; font-weight: 700; cursor: pointer; font-family: inherit; }
+        .composer .submit:hover { background: #272C30; }
+        .composer .error { color: #D6402C; font-size: 0.8rem; margin-top: 0.25rem; }
+        .validation-summary { margin: 0.75rem 1rem 0; padding: 0.7rem 0.85rem; border-radius: 8px; background: #FFF1EF; color: #B93225; font-size: 0.85rem; }
         .post { display: flex; gap: 0.75rem; padding: 0.9rem 1rem; border-bottom: 1px solid #EFF1F4; }
         .post:hover { background: #F7F8F9; }
         .avatar { width: 44px; height: 44px; border-radius: 999px; flex-shrink: 0; color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 1.1rem; }
@@ -55,6 +67,46 @@
         </header>
 
         <main class="feed">
+            @if ($errors->any())
+                <div class="validation-summary" role="alert">入力内容を確認してください。</div>
+            @endif
+            <form class="composer" action="{{ route('posts.store') }}" method="POST">
+                @csrf
+                <h2>ポストを投稿</h2>
+                <p class="author">投稿者：{{ auth()->user()->name }}</p>
+
+                <div class="form-group">
+                    <label for="title">タイトル</label>
+                    <input type="text" id="title" name="title" value="{{ old('title') }}" maxlength="255" required>
+                    @error('title')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="category_id">トピック</label>
+                    <select id="category_id" name="category_id" required>
+                        <option value="">選択してください</option>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <div class="form-group">
+                    <label for="content">本文</label>
+                    <textarea id="content" name="content" maxlength="140" required>{{ old('content') }}</textarea>
+                    @error('content')
+                        <p class="error">{{ $message }}</p>
+                    @enderror
+                </div>
+
+                <button type="submit" class="submit">投稿</button>
+            </form>
+
             @if($posts->isEmpty())
                 <p class="empty">まだポストがありません。</p>
             @else

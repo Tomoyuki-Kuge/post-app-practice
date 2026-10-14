@@ -28,6 +28,8 @@
         .btn-secondary:hover { background: #F7F8F9; }
         .btn:focus-visible { outline: 2px solid #E8792B; outline-offset: 2px; }
         .error { color: #D6402C; font-size: 0.83rem; margin-top: 0.3rem; }
+        .remaining-count { color: #5B6570; font-size: 0.8rem; margin-top: 0.3rem; text-align: right; }
+        .remaining-count.is-over { color: #D6402C; font-weight: 700; }
     </style>
 </head>
 <body>
@@ -67,6 +69,7 @@
                 <div class="form-group">
                     <label for="content">本文</label>
                     <textarea id="content" name="content" required>{{ old('content', $post->content) }}</textarea>
+                    <p id="content-remaining" class="remaining-count" aria-live="polite"></p>
                     @error('content')
                         <p class="error">{{ $message }}</p>
                     @enderror
@@ -79,5 +82,19 @@
             </form>
         </main>
     </div>
+    <script>
+        const contentField = document.getElementById('content');
+        const remainingCount = document.getElementById('content-remaining');
+        const contentLimit = 140;
+
+        const updateRemainingCount = () => {
+            const remaining = contentLimit - Array.from(contentField.value).length;
+            remainingCount.textContent = `残り ${remaining}字`;
+            remainingCount.classList.toggle('is-over', remaining < 0);
+        };
+
+        contentField.addEventListener('input', updateRemainingCount);
+        updateRemainingCount();
+    </script>
 </body>
 </html>
