@@ -9,11 +9,26 @@
 ## 書き方
 
 - テスト名は `test_` に続けて、確認する振る舞いが分かる snake_case で記述します。例: `test_users_cannot_edit_another_users_post`。
-- Feature テストは `Tests\\TestCase` を使い、必要に応じて HTTP リクエストを実行してレスポンスを検証します。
-- Unit テストは `PHPUnit\\Framework\\TestCase` を使い、対象ロジックをアプリケーション全体から切り離して検証します。
+- Feature テストは `Tests\TestCase` を継承し、Unit テストは `PHPUnit\Framework\TestCase` を継承します。
+- テストメソッドは `public function test_...(): void` の形式で記述します。
 - 変更した機能の振る舞いをカバーするテストを追加または更新します。
+
+## Feature テスト
+
+- データベースを使うテストでは `RefreshDatabase` を使い、各テストに必要なデータをそのテスト内で作成します。既存のデータや他のテストの実行順に依存させません。
+- 利用者は `User::factory()->create()` で作成します。カテゴリや投稿などは、既存テストと同様にモデルの `create()` で必要な値を指定できます。
+- 名前付きルートへのアクセスは `route('posts.store')` のように記述します。ログイン済みの操作は `actingAs($user)` を使い、未ログインの操作も確認します。
+- 正常系では、レスポンスやリダイレクト先に加えて、`assertDatabaseHas` や `assertDatabaseCount` で保存結果を確認します。
+- 入力エラーでは `assertSessionHasErrors` で対象項目を確認し、不正なデータが保存されないことも検証します。文字数制限や存在しないカテゴリなど、機能の制約を確認します。
+- 投稿者をリクエストで指定してもログイン中の利用者に固定されることなど、認証・認可に関わる振る舞いを確認します。
+- 画面の表示内容は `assertSee`、表示順は `assertSeeInOrder` などで検証します。
 
 ## 実行
 
 - Docker Desktop を起動し、テストは `./vendor/bin/sail artisan test` で実行します。
 - カバレッジの数値基準は設けません。
+
+## 結果の報告
+
+- 作業結果には、実行したテストコマンドと成功・失敗の結果を記載します。実行できない場合は、その理由と未確認の範囲を記載します。
+- PR 本文には「テスト結果」の見出しを設け、実行したコマンドと成功・失敗の結果を記載します。
