@@ -20,4 +20,5 @@
 ## 実行
 
 - Docker Desktop を起動し、テストは `./vendor/bin/sail test` で実行してください。
+- ./vendor/bin/sail test --filter ReplyTest # テストを1クラスだけ実行する
 - 失敗した場合は原因を修正して再実行してください。実行できない場合は、理由と未確認範囲を作業報告に記載してください。

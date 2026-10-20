@@ -23,9 +23,9 @@ Docker Desktop を起動してから Laravel Sail を使います。
 - テストの追加・更新や実行では、[`.claude/rules/testing.md`](.claude/rules/testing.md) のルールも参照してください。
 
 ```bash
-./vendor/bin/sail up -d
-./vendor/bin/sail artisan migrate --seed
-./vendor/bin/sail down
+./vendor/bin/sail up -d                  # アプリと MySQL を起動
+./vendor/bin/sail artisan migrate --seed # スキーマとサンプルデータを投入
+./vendor/bin/sail down                   # コンテナを停止
 ```
 
 - Laravel コマンドは `./vendor/bin/sail artisan` 経由で実行してください。`php artisan` は使用しないでください。
