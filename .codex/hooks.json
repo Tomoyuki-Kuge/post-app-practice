@@ -1,0 +1,30 @@
+{
+  "description": "Run Sail tests after Codex file edits and before completing edited turns.",
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "apply_patch|Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/ensure-tests-pass.sh\"",
+            "timeout": 600,
+            "statusMessage": "Running Sail tests after file edit"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/ensure-tests-pass.sh\"",
+            "timeout": 600,
+            "statusMessage": "Checking Sail tests before completing"
+          }
+        ]
+      }
+    ]
+  }
+}

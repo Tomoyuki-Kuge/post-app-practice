@@ -10,6 +10,7 @@ class PostController extends Controller
 {
     public function index()
     {
+        // 投稿と関連するユーザー・カテゴリ、カテゴリ一覧を取得して投稿一覧画面に渡す。
         $posts = Post::with(['user', 'category'])->latest()->orderByDesc('id')->get();
         $categories = Category::orderBy('id')->get();
 
@@ -66,6 +67,7 @@ class PostController extends Controller
 
     public function destroy(Post $post)
     {
+        // 投稿の削除権限を確認して投稿を削除し、投稿一覧へ戻す。
         $this->authorize('delete', $post);
 
         $post->delete();
