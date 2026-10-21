@@ -1,0 +1,17 @@
+prefix_rule(
+    pattern = ["git", "push"],
+    decision = "prompt",
+    justification = "git push は実行前に確認する",
+)
+
+prefix_rule(
+    pattern = ["./vendor/bin/sail", "test"],
+    decision = "allow",
+    justification = "Sail のテスト実行を許可する",
+)
+
+prefix_rule(
+    pattern = ["sail", "test"],
+    decision = "allow",
+    justification = "Sail のテスト実行を許可する",
+)
