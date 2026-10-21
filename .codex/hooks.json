@@ -7,7 +7,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/ensure-tests-pass.sh\"",
+            "command": "test -x vendor/bin/sail || exit 0; ./vendor/bin/sail artisan test >&2 || exit 2",
             "timeout": 600,
             "statusMessage": "Running Sail tests after file edit"
           }
@@ -19,7 +19,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "bash \"$(git rev-parse --show-toplevel)/.codex/hooks/ensure-tests-pass.sh\"",
+            "command": "test -x vendor/bin/sail || exit 0; ./vendor/bin/sail artisan test >&2 || exit 2",
             "timeout": 600,
             "statusMessage": "Checking Sail tests before completing"
           }
