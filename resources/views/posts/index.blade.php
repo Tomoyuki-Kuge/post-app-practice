@@ -151,7 +151,7 @@
                                 <span class="time">{{ $post->created_at->format('n月j日 H:i') }}</span>
                                 <span class="topic" style="background: {{ $tBg }}; color: {{ $tFg }};">{{ $post->category->name }}</span>
                             </div>
-                            <p class="post-title">{{ $post->title }}</p>
+                            <p class="post-title"><a href="{{ route('posts.show', $post) }}">{{ $post->title }}</a></p>
                             <p class="post-text">{{ $post->content }}</p>
                             @canany(['update', 'delete'], $post)
                                 <div class="post-actions">
